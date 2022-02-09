@@ -26,13 +26,6 @@ namespace Task_3
             }
         }
 
-        public void prepend(KeyValuePair pair)
-        {
-            LinkedListNode newHead = new LinkedListNode(pair);
-            newHead.Next = _head;
-            _head = newHead;
-        }
-        
         public void RemoveByKey(string key)
         {
             if (_head == null) return;
