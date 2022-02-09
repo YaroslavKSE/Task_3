@@ -71,7 +71,7 @@ namespace Task_3
             LinkedListNode current = _head;
             while (current != null)
             {
-                Console.Write(current.Pair.Key); Console.Write(":"); Console.WriteLine(current.Pair.Value); 
+                Console.Write(current.Pair.Key); Console.Write(" : "); Console.WriteLine(current.Pair.Value); 
                 current = current.Next;
             }
         }
