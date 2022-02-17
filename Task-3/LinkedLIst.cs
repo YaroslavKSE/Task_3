@@ -25,7 +25,7 @@ namespace Task_3
                 current.Next = toAdd;
             }
         }
-
+        
         public void RemoveByKey(string key)
         {
             if (_head == null) return;
@@ -66,6 +66,12 @@ namespace Task_3
             return null;
         }
 
+        public LinkedListNode GetHead()
+        {
+            return _head;
+        }
+        
+
         public void PrintAllNodes()
         {
             LinkedListNode current = _head;
@@ -74,6 +80,11 @@ namespace Task_3
                 Console.Write(current.Pair.Key); Console.Write(" : "); Console.WriteLine(current.Pair.Value); 
                 current = current.Next;
             }
+        }
+
+        public bool IsEmpty()
+        {
+            return _head == null;
         }
     }
     public class KeyValuePair

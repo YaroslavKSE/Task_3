@@ -1,62 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
+using Task_3;
 
-namespace Task_3
+bool valid = true;
+while (valid)
 {
-    internal static class Program
+    Console.WriteLine("To get the definition input word here:");
+    string userInput = Console.ReadLine()?.ToUpper();
+    var dict = new StringsDictionary();
+    foreach (var element in File.ReadAllLines(@"D:\C#\Task-2\Task-3\dictionary.txt.txt"))
     {
-        static void Main(string[] args)
+        var letter = element.Split(new[] {";"}, StringSplitOptions.None)[0];
+        string definition;
+        if (element.Contains("Defn: "))
         {
-            LinkedList first = new LinkedList();
-            first.Add(new KeyValuePair("1", "Hello"));
-            first.Add(new KeyValuePair("2", "Hi"));
-            first.Add(new KeyValuePair("3", "Buy"));
-            first.Add(new KeyValuePair("4", "GoodBuy"));
-            first.PrintAllNodes();
-            first.RemoveByKey("3");
-            first.RemoveByKey("1");
-            var a = first.GetItemWithKey("2");
-            Console.WriteLine(a.Key);
-            Console.WriteLine(a.Value);
-            first.PrintAllNodes();
-            
-            
-            int CalculateHash(string key)
-            {
-                var keys = key.ToCharArray();
-                var hashcode = 0;
-                foreach (var variable in keys)
-                {
-                    if (variable >= '7')
-                    {
-                        var byteChar = (byte)variable;
-                        var hash = ((byteChar * byteChar) ^ 2  / byteChar - byteChar * 3) ^ 27 - 12345;
-                        hashcode += hash;   
-                    }
-                    else if (variable < '7' && variable > '4')
-                    {
-                        var byteChar = (byte) variable;
-                        var hash = ((byteChar * byteChar) ^ 5 / byteChar - byteChar * 10) ^ 3 - 4321;
-                        hashcode += hash;
-                    }
-                    else
-                    {
-                        var byteChar = (byte) variable;
-                        var hash = ((byteChar * byteChar) ^ 5 / byteChar - byteChar * 12) ^ 3 - 8921;
-                        hashcode += hash;   
-                    }
-                }
-                return hashcode;
-            }
-            Console.WriteLine(CalculateHash("30"));
-            Console.WriteLine(CalculateHash("30"));
-            Console.WriteLine(CalculateHash("70"));
-            Console.WriteLine(CalculateHash("2"));
-            Console.WriteLine(CalculateHash("3"));
-            Console.WriteLine(CalculateHash("5"));
-            Console.WriteLine(CalculateHash("0"));
-
-            
+            definition = element.Split(new[] {"Defn: "}, StringSplitOptions.None)[1];
         }
+        else
+        {
+            definition = element.Split(new[] {"; "}, StringSplitOptions.None)[1];
+        }
+        dict.Add(letter, definition);
+    }
+    Console.WriteLine(dict.Get(userInput));
+    Console.WriteLine("Exit[Yes/No]?");
+    string end2 = Console.ReadLine()?.ToUpper();
+    if (end2 == "YES")
+    {
+        valid = false;
     }
 }
+
+
+            
+            
+        
+    
