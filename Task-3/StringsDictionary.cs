@@ -9,9 +9,21 @@ namespace Task_3
 
         public void Add(string key, string value)
         {
-            
+            var hashCode = Math.Abs(key.GetHashCode());
+            var index = hashCode % Initialsize;
+            var toAdd = new KeyValuePair(key, value);
+            var head = buckets[index];
+            if (head == null)
+            {
+                buckets[index] = new LinkedList();
+                buckets[index].Add(toAdd);
+            }
+            else
+            {
+                buckets[index].Add(toAdd);
+            }
         }
-
+        
         public void Remove(string key)
         {
             
