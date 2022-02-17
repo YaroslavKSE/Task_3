@@ -10,8 +10,8 @@ namespace Task_3
         private double Loadfactor;
         public void Add(string key, string value)
         {
-            var hashCode = Math.Abs(CalculateHash(key));
-            // var hashCode = Math.Abs(key.GetHashCode());
+            // var hashCode = Math.Abs(CalculateHash(key));
+            var hashCode = Math.Abs(key.GetHashCode());
             var index = hashCode % _initialsize;
             var toAdd = new KeyValuePair(key, value);
             var head = _buckets[index];
@@ -45,8 +45,8 @@ namespace Task_3
 
         public string Get(string key)
         {
-            var hashCode = Math.Abs(CalculateHash(key));
-            // var hashCode = Math.Abs(key.GetHashCode());
+            // var hashCode = Math.Abs(CalculateHash(key));
+            var hashCode = Math.Abs(key.GetHashCode());
             var index = hashCode % _initialsize;
             var head = _buckets[index];
             var current = head.GetHead();

@@ -24,8 +24,8 @@ while (valid)
     }
     Console.WriteLine(dict.Get(userInput));
     Console.WriteLine("Exit[Yes/No]?");
-    string end2 = Console.ReadLine()?.ToUpper();
-    if (end2 == "YES")
+    string end = Console.ReadLine()?.ToUpper();
+    if (end == "YES")
     {
         valid = false;
     }
