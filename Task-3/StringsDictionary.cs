@@ -4,8 +4,8 @@ namespace Task_3
 {
     public class StringsDictionary
     {
-        private int _initialsize = 40000;
-        private LinkedList[] _buckets = new LinkedList[40000];
+        private static int _initialsize = 500;
+        private LinkedList[] _buckets = new LinkedList[_initialsize];
         private int load;
         private double Loadfactor;
         public void Add(string key, string value)
@@ -27,7 +27,7 @@ namespace Task_3
                 load += 1;
             }
             
-            // CheckLoadfactor();
+            CheckLoadfactor();
         }
         
         public void Remove(string key)
@@ -49,18 +49,32 @@ namespace Task_3
             var hashCode = Math.Abs(key.GetHashCode());
             var index = hashCode % _initialsize;
             var head = _buckets[index];
-            var current = head.GetHead();
-            while (current.Pair.Key != key)
+            if (head == null)
             {
-                current = current.Next;
+                return "Not such letter";
             }
-            
-            if (current.Pair.Key == key)
+
+            if (head.GetHead() != null)
             {
-                var result = current.Pair.Value;
-                return result;
+                var current = head.GetHead();
+                while (current.Pair.Key != key)
+                {
+                    current = current.Next;
+                    if (current == null)
+                    {
+                        break;
+                    }
+                }
+
+                if (current.Pair.Key == key)
+                {
+                    var result = current.Pair.Value;
+                    return result;
+                }
             }
+
             return "Not such letter";
+           
         }
 
         public void PrintBuckets()
@@ -92,6 +106,26 @@ namespace Task_3
                         continue;
                     } 
                     var current = element.GetHead();
+                    while (current != null)
+                    {
+                        var hashCode = Math.Abs(current.Pair.Key.GetHashCode());
+                        var index = hashCode % _initialsize;
+                        var head = newBuckets[index];
+                        var toAdd = current.Pair;
+                        if (head == null)
+                        {
+                            newBuckets[index] = new LinkedList();
+                            newBuckets[index].Add(toAdd);
+                            load += 1;
+                        }
+                        else
+                        {
+                            newBuckets[index].Add(toAdd);
+                            load += 1;
+                        }
+
+                        current = current.Next;
+                    }
                 }
 
                 _buckets = newBuckets;

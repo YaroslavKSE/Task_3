@@ -5,7 +5,6 @@ namespace Task_3
     public class LinkedList
     {
         private LinkedListNode _head;
-
         public void Add(KeyValuePair pair)
         {
             if (_head == null)
@@ -70,7 +69,6 @@ namespace Task_3
         {
             return _head;
         }
-        
 
         public void PrintAllNodes()
         {
@@ -112,5 +110,4 @@ namespace Task_3
             Next = next;
         }
     }
-    
 }
