@@ -1,15 +1,12 @@
-﻿using System;
+using System;
 using System.IO;
 using Task_3;
 
 bool valid = true;
 var dict = new StringsDictionary();
-while (valid)
+
+foreach (var element in File.ReadAllLines(@"C:\C#\Task_3\dictionary.txt.txt"))
 {
-    Console.WriteLine("To get the definition input word here:");
-    string userInput = Console.ReadLine()?.ToUpper();
-    foreach (var element in File.ReadAllLines(@"D:\C#\Task-2\Task-3\dictionary.txt.txt"))
-    {
         var letter = element.Split(new[] {";"}, StringSplitOptions.None)[0];
         string definition;
         if (element.Contains("Defn: "))
@@ -21,7 +18,12 @@ while (valid)
             definition = element.Split(new[] {"; "}, StringSplitOptions.None)[1];
         }
         dict.Add(letter, definition);
-    }
+}
+
+while (valid)
+{
+    Console.WriteLine("To get the definition input word here:");
+    string userInput = Console.ReadLine()?.ToUpper();
     Console.WriteLine(dict.Get(userInput));
     Console.WriteLine("Exit[Yes/No]?");
     string end = Console.ReadLine()?.ToUpper();
@@ -30,6 +32,7 @@ while (valid)
         valid = false;
     }
 }
+
 
 
             
